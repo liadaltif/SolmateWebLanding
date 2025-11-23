@@ -7,13 +7,13 @@ export default function Page() {
 
   return (
     <main className="hero">
-      {/* Top-left / top-center logo */}
+      {/* Logo */}
       <div className="logoTop">
         <img src={LOGO_IMG} alt="Solmate logo" className="logoImg noDrag" />
         <span className="brandText noClick">Solmate</span>
       </div>
 
-      {/* LEFT CONTENT */}
+      {/* Text + CTA */}
       <div className="contentLeft">
         <h1 className="headline">
           <span className="headlineTop">Music based</span>
@@ -47,7 +47,7 @@ export default function Page() {
         </p>
       </div>
 
-      {/* RIGHT CONTENT */}
+      {/* Phone */}
       <div className="contentRight">
         <img src={IPHONE_IMG} alt="Solmate app" className="iphone noDrag" />
       </div>
@@ -58,7 +58,7 @@ export default function Page() {
           width: 100%;
           background: #141413;
           display: grid;
-          grid-template-columns: 1fr 1fr; /* desktop: 2 columns */
+          grid-template-columns: 1fr 1fr;
           column-gap: 120px;
           padding: 40px 70px;
           position: relative;
@@ -66,6 +66,39 @@ export default function Page() {
           color: #faf9f5;
           overflow: hidden;
           align-items: center;
+        }
+
+        /* ✨ dotted grid background that fades out */
+        .hero::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          /* dot grid */
+          background-image: radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.15) 1px,
+            transparent 0
+          );
+          background-size: 24px 24px;
+          background-position: top center;
+          opacity: 0.45;
+          /* fade dots away as you go down */
+          mask-image: linear-gradient(to bottom, black 0%, transparent 70%);
+          -webkit-mask-image: linear-gradient(
+            to bottom,
+            black 0%,
+            transparent 70%
+          );
+          z-index: 0;
+        }
+
+        /* make actual content sit above the dots */
+        .logoTop,
+        .contentLeft,
+        .contentRight {
+          position: relative;
+          z-index: 1;
         }
 
         /* LOGO */
@@ -76,7 +109,6 @@ export default function Page() {
           display: flex;
           align-items: center;
           gap: 8px;
-          z-index: 3;
         }
 
         .logoImg {
@@ -99,7 +131,7 @@ export default function Page() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          transform: translateY(-24px); /* lifted up a bit */
+          transform: translateY(-24px);
         }
 
         .headline {
@@ -108,7 +140,7 @@ export default function Page() {
           line-height: 1.05;
           margin: 0 0 36px;
           font-weight: 700;
-          letter-spacing: 0.02em; /* loosened */
+          letter-spacing: 0.02em;
           text-align: center;
         }
 
@@ -116,13 +148,14 @@ export default function Page() {
           white-space: nowrap;
         }
 
+        /* BUTTON */
         .storeButton {
           margin-top: 4px;
           display: inline-flex;
           border-radius: 999px;
           background: #ffffff;
           padding: 10px 48px;
-          min-width: 380px; /* long pill */
+          min-width: 380px;
           justify-content: center;
           box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
           text-decoration: none;
@@ -137,7 +170,7 @@ export default function Page() {
         .storeIconWrap {
           width: 28px;
           height: 28px;
-          border-radius: 6px; /* not round */
+          border-radius: 6px;
           overflow: hidden;
           flex-shrink: 0;
         }
@@ -181,7 +214,7 @@ export default function Page() {
           width: clamp(260px, 28vw, 430px);
           height: auto;
           display: block;
-          filter: none; /* no glow, no tilt */
+          filter: none;
         }
 
         .noClick {
@@ -198,52 +231,46 @@ export default function Page() {
         /* 📱 MOBILE / IPHONE LAYOUT */
         @media (max-width: 900px) {
           .hero {
-            /* switch from grid to vertical stack */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            padding: 60px 22px 40px;
+            padding: 110px 22px 40px;
             column-gap: 0;
           }
 
           .logoTop {
-            /* visually top-centered on narrow screens */
             left: 50%;
             transform: translateX(-50%);
+            top: 46px;
           }
 
           .contentLeft {
             max-width: 100%;
             justify-self: center;
             align-items: center;
-            transform: none; /* reset translateY */
+            transform: none;
             margin-top: 40px;
           }
 
           .headline {
             font-size: clamp(28px, 7vw, 34px);
-            margin-bottom: 32px;
-            letter-spacing: 0.02em;
+            margin-bottom: 28px;
           }
 
           .storeButton {
-            min-width: 80vw;
-            max-width: 380px;
+            min-width: 82vw;
+            max-width: 400px;
           }
 
           .contentRight {
             justify-content: center;
-            margin-top: 56px;
+            margin-top: 60px;
           }
 
           .iphone {
-            width: 70vw;
-            max-width: 320px;
-          }
-
-          .logoTop {
-            top: 20px;
+            width: 55vw;
+            max-width: 260px;
           }
         }
       `}</style>
